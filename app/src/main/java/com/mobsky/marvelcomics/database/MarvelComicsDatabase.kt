@@ -4,15 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.mobsky.home.data.local.dao.MarvelDAO
+import com.mobsky.home.data.local.dao.model.ComicEntity
 
-//@Database(
-//    entities = [BookEntity::class],
-//    version = 1,
-//    exportSchema = false
-//)
+@Database(
+    entities = [ComicEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class MarvelComicsDatabase : RoomDatabase() {
 
-//    abstract fun aBibliaDigitalDAO(): ABibliaDigitalDAO
+    abstract fun marvelDAO(): MarvelDAO
 
     companion object {
         @Volatile

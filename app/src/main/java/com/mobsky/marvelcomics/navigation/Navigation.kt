@@ -3,6 +3,7 @@ package com.mobsky.marvelcomics.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.mobsky.home.navigation.homeNavGraph
 import com.mobsky.navigation.HomeGraph
 import com.mobsky.navigation.RootGraph
 
@@ -15,7 +16,7 @@ fun RootNavigationGraph(navController: NavHostController) {
         startDestination = HomeGraph.Root().rote
     ) {
 
-//        homeNavGraph(navController)
+        homeNavGraph(navController)
 
     }
 }
