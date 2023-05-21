@@ -3,9 +3,7 @@ package com.mobsky.home.presentation.comics
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobsky.home.domain.model.Comics
-import com.mobsky.home.domain.model.HomeMenus
 import com.mobsky.home.domain.usecase.GetComicsUseCase
-import com.mobsky.home.domain.usecase.GetHomeMenuUseCase
 import com.mobsky.home.domain.usecase.invoke
 import com.mobsky.home.presentation.util.TaskState
 import kotlinx.coroutines.flow.MutableStateFlow

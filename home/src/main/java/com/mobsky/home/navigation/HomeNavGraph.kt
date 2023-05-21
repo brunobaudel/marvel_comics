@@ -20,11 +20,16 @@ fun NavGraphBuilder.homeNavGraph(navController: NavController) {
 
         composable(route = HomeGraph.Home().rote) {
             val viewModel = koinViewModel<HomeScreenViewModel>()
-            HomeScreen(viewModel) {
-                val destination = when (it) {
+            HomeScreen(viewModel) { navigate ->
+                val destination = when (navigate) {
+
+                    is HomeGraph.Comics -> navigate.rote
+
                     else -> ""
                 }
-                navController.navigate(destination)
+
+                if (destination.isNotEmpty())
+                    navController.navigate(destination)
             }
         }
 

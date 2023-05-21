@@ -1,27 +1,24 @@
 package com.mobsky.home.presentation.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mobsky.home.domain.model.HomeMenus
-import com.mobsky.home.presentation.components.HomeSection
+import com.mobsky.home.presentation.components.Gridview
 import com.mobsky.home.presentation.components.MarvelTopBar
 import com.mobsky.home.presentation.components.ScreenStateView
+import com.mobsky.home.presentation.components.SimpleCardItem
 import com.mobsky.home.presentation.util.TaskState
 import com.mobsky.navigation.Navigate
 
@@ -56,20 +53,39 @@ fun HomeView(viewModel: HomeScreenViewModel, onClickNavigation: (navigate: Navig
     ScreenStateView(uiState,
         tryAgainCallBack = { },
         content = {
-            Column {
-                HomeSection(title = "") {
-                    MenuSession(uiState.homeMenus)
-                }
-            }
+            MenuSession(uiState.homeMenus, onClickNavigation)
         }
     )
 }
 
-
 @Composable
-fun MenuSession(homeMenus: HomeMenus) {
-    Box(modifier = Modifier.padding(4.dp)) {
+fun MenuSession(homeMenus: HomeMenus, onClickNavigation: (navigate: Navigate) -> Unit) {
 
+    val simpleCardsItems = homeMenus.map { item ->
+        SimpleCardItem(
+            text = item.name,
+            id = item.id
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .padding(top = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Gridview(
+            Modifier.padding(2.dp),
+            simpleCardsItems
+        ) { simpleCardsItem ->
+            val itemClicked = homeMenus.find { it.id == simpleCardsItem.id }
+
+            itemClicked?.run {
+                onClickNavigation.invoke(route)
+            }
+
+        }
     }
 }
 

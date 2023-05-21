@@ -9,11 +9,9 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = DefaultsConfig.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -24,13 +22,26 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+        }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = DefaultsConfig.kotlinCompilerExtensionVersion
+    }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -39,7 +50,7 @@ dependencies {
     implementation(project(mapOf("path" to ":navigation")))
     implementation(project(mapOf("path" to ":network")))
 
-    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     testImplementation("junit:junit:4.13.2")
