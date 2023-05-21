@@ -14,7 +14,8 @@ import retrofit2.Retrofit
 
 val startNetworkParameters = StartNetworkParameters(
     baseUrl = BuildConfig.BASE_URL,
-    isDebug = BuildConfig.DEBUG
+    isDebug = BuildConfig.DEBUG,
+    queriesParameters = QueryStringCredentials().getQueryStringMap()
 )
 
 val appDiModule = module {

@@ -1,9 +1,11 @@
 package com.mobsky.network
 
-import java.util.concurrent.TimeUnit
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
+
 
 typealias TimeInMileSeconds = Long
 
@@ -13,7 +15,8 @@ data class StartNetworkParameters(
     val okHttpClient: OkHttpClient? = null,
     val readTimeOut: TimeInMileSeconds = 3000,
     val writeTimeOut: TimeInMileSeconds = 3000,
-    val headers: Map<String, String> = mapOf()
+    val headers: Map<String, String> = mapOf(),
+    val queriesParameters: Map<String, String>? = mapOf()
 ) {
 
     fun getHttpClientDefault(): OkHttpClient = let {
@@ -31,7 +34,14 @@ data class StartNetworkParameters(
                 readTimeout(readTimeOut, TimeUnit.MILLISECONDS)
                 writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS)
                 addInterceptor { chain ->
-                    val request: Request = chain.request().newBuilder().headers(headers).build()
+
+                    val request: Request =
+                        chain.request()
+                            .newBuilder()
+                            .headers(headers)
+                            .url(chain.request().url.queriesParameters(queriesParameters))
+                            .build()
+
                     chain.proceed(request)
                 }
             }.build()
@@ -45,6 +55,14 @@ data class StartNetworkParameters(
             this.addHeader(name, value)
         }
         return this
+    }
+
+    private fun HttpUrl.queriesParameters(queries: Map<String, String>?): HttpUrl {
+        val url = this.newBuilder()
+        queries?.forEach { (name, value) ->
+            url.addQueryParameter(name, value)
+        }
+        return url.build()
     }
 
 }

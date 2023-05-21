@@ -5,8 +5,5 @@ import com.mobsky.home.data.network.api.model.comics.ComicsResponse
 import com.mobsky.network.util.ResultWrapper
 
 interface MarvelNetwork {
-
-    suspend fun getComics(): ResultWrapper<ComicsResponse>
-
-
+    suspend fun getComics(param: Map<String, String>): ResultWrapper<ComicsResponse>
 }

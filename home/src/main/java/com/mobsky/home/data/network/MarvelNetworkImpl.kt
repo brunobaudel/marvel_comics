@@ -12,11 +12,11 @@ class MarvelNetworkImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : MarvelNetwork {
 
-    override suspend fun getComics(): ResultWrapper<ComicsResponse> =
+    override suspend fun getComics(param: Map<String, String>): ResultWrapper<ComicsResponse> =
         safeApiCall(
             dispatcher = dispatcher,
             apiCall = {
-                gitHubApi.getComics()
+                gitHubApi.getComics(param)
             },
             transformError = {
 //                Gson().fromJson(it, GitErrorModelResponse::class.java).message
