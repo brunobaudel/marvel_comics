@@ -2,8 +2,9 @@ package com.mobsky.home.presentation.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -13,13 +14,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mobsky.home.domain.model.HomeMenu
 import com.mobsky.home.domain.model.HomeMenus
 import com.mobsky.home.presentation.components.Gridview
 import com.mobsky.home.presentation.components.MarvelTopBar
 import com.mobsky.home.presentation.components.ScreenStateView
 import com.mobsky.home.presentation.components.SimpleCardItem
 import com.mobsky.home.presentation.util.TaskState
+import com.mobsky.navigation.HomeGraph
 import com.mobsky.navigation.Navigate
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -59,7 +63,7 @@ fun HomeView(viewModel: HomeScreenViewModel, onClickNavigation: (navigate: Navig
 }
 
 @Composable
-fun MenuSession(homeMenus: HomeMenus, onClickNavigation: (navigate: Navigate) -> Unit) {
+fun MenuSession(homeMenus: HomeMenus, onClickNavigation: (navigate: Navigate) -> Unit = {}) {
 
     val simpleCardsItems = homeMenus.map { item ->
         SimpleCardItem(
@@ -68,24 +72,61 @@ fun MenuSession(homeMenus: HomeMenus, onClickNavigation: (navigate: Navigate) ->
         )
     }
 
-    Column(
+    Box(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
-            .padding(top = 8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(8.dp)
+            .fillMaxSize(),
+        contentAlignment = Alignment.TopCenter
     ) {
         Gridview(
-            Modifier.padding(2.dp),
+            Modifier.padding(top = 12.dp),
             simpleCardsItems
         ) { simpleCardsItem ->
-            val itemClicked = homeMenus.find { it.id == simpleCardsItem.id }
-
-            itemClicked?.run {
+            homeMenus.find { it.id == simpleCardsItem.id }?.run {
                 onClickNavigation.invoke(route)
             }
-
         }
     }
 }
 
+@Preview
+@Composable
+fun MenuSession() {
+
+    MenuSession(
+        listOf(
+            HomeMenu(
+                id = 1,
+                name = "Item 1",
+                route = HomeGraph.Home(),
+                isActive = false
+            ),
+            HomeMenu(
+                id = 1,
+                name = "Item 2",
+                route = HomeGraph.Home(),
+                isActive = false
+            ),
+            HomeMenu(
+                id = 1,
+                name = "Item 3",
+                route = HomeGraph.Home(),
+                isActive = false
+            ),
+            HomeMenu(
+                id = 1,
+                name = "Item 4",
+                route = HomeGraph.Home(),
+                isActive = false
+            ),
+            HomeMenu(
+                id = 1,
+                name = "Item 5",
+                route = HomeGraph.Home(),
+                isActive = false
+            )
+        )
+    )
+
+}

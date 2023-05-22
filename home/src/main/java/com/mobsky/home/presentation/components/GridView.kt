@@ -4,12 +4,14 @@ package com.mobsky.home.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -18,9 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mobsky.navigation.Navigate
 
 data class SimpleCardItem(
     val text: String,
@@ -33,22 +35,24 @@ fun Gridview(
     gridViewData: List<SimpleCardItem> = emptyList(),
     onClickNavigation: (SimpleCardItem) -> Unit = {}
 ) {
-    LazyHorizontalGrid(
-        rows = GridCells.Fixed(2),
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier.height(120.dp)
-    ) {
-        items(gridViewData) { gridItem ->
-            SimpleCard(
-                text = gridItem.text,
-                modifier = Modifier.height(32.dp)
-            ) {
-                onClickNavigation.invoke(gridItem)
+
+    LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = modifier.fillMaxHeight()
+        ) {
+            items(gridViewData) { gridItem ->
+                SimpleCard(
+                    text = gridItem.text,
+                    modifier = Modifier.height(32.dp)
+                ) {
+                    onClickNavigation.invoke(gridItem)
+                }
             }
         }
-    }
+
 }
 
 @Composable
@@ -57,26 +61,21 @@ fun SimpleCard(
     modifier: Modifier = Modifier,
     action: () -> Unit = {}
 ) {
+
     Surface(
-        shape = MaterialTheme.shapes.small, // ARREDONDA AS BORDAS
-        modifier = modifier
+        shape = MaterialTheme.shapes.medium
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        Box(
             modifier = Modifier
+                .aspectRatio(1f)
                 .background(Color.LightGray)
-                .clickable { action() }
+                .clickable { action() },
+            contentAlignment = Alignment.Center
         ) {
-//            Image(
-//                painter = painterResource(drawable),
-//                contentDescription = null,
-//                contentScale = ContentScale.Crop,
-//                modifier = Modifier.size(56.dp)
-//            )
             Text(
                 text = text,
                 style = MaterialTheme.typography.caption,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                textAlign = TextAlign.Center,
             )
         }
     }
@@ -88,10 +87,10 @@ fun GridviewPreview() {
     MaterialTheme {
         Gridview(
             gridViewData = listOf(
-                SimpleCardItem("teste", 1),
-                SimpleCardItem("teste teste", 1),
-                SimpleCardItem("teste", 1),
-                SimpleCardItem("teste", 1),
+                SimpleCardItem("teste1", 1),
+                SimpleCardItem("teste teste2", 1),
+                SimpleCardItem("teste3", 1),
+                SimpleCardItem("teste4", 1),
             ),
             modifier = Modifier.padding(8.dp)
         )
