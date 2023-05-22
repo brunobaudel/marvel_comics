@@ -1,9 +1,9 @@
-package com.mobsky.home.data.network.api.model.comics
+package com.mobsky.home.data.network.api.model.characters
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Url(
+data class UrlResponse(
     @SerializedName("type")
     val type: String? = "",
     @SerializedName("url")

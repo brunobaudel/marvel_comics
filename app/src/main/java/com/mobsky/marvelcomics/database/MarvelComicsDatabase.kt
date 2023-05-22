@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mobsky.home.data.local.dao.MarvelDAO
+import com.mobsky.home.data.local.dao.model.CharacterEntity
 import com.mobsky.home.data.local.dao.model.ComicEntity
 
 @Database(
-    entities = [ComicEntity::class],
+    entities = [ComicEntity::class, CharacterEntity::class],
     version = 1,
     exportSchema = false
 )

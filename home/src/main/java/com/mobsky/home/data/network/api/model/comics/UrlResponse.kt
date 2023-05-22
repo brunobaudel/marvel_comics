@@ -3,9 +3,9 @@ package com.mobsky.home.data.network.api.model.comics
 
 import com.google.gson.annotations.SerializedName
 
-data class Price(
-    @SerializedName("price")
-    val price: Double? = 0.0,
+data class UrlResponse(
     @SerializedName("type")
-    val type: String? = ""
+    val type: String? = "",
+    @SerializedName("url")
+    val url: String? = ""
 )

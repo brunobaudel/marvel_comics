@@ -5,6 +5,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.mobsky.home.presentation.characters.CharactersScreen
+import com.mobsky.home.presentation.characters.CharactersScreenViewModel
 import com.mobsky.home.presentation.comics.ComicsScreen
 import com.mobsky.home.presentation.comics.ComicsScreenViewModel
 import com.mobsky.home.presentation.home.HomeScreen
@@ -24,6 +26,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavController) {
                 val destination = when (navigate) {
 
                     is HomeGraph.Comics -> navigate.rote
+                    is HomeGraph.Characters -> navigate.rote
 
                     else -> ""
                 }
@@ -36,6 +39,16 @@ fun NavGraphBuilder.homeNavGraph(navController: NavController) {
         composable(route = HomeGraph.Comics().rote) {
             val viewModel = koinViewModel<ComicsScreenViewModel>()
             ComicsScreen(viewModel) {
+                val destination = when (it) {
+                    else -> ""
+                }
+                navController.navigate(destination)
+            }
+        }
+
+        composable(route = HomeGraph.Characters().rote) {
+            val viewModel = koinViewModel<CharactersScreenViewModel>()
+            CharactersScreen(viewModel) {
                 val destination = when (it) {
                     else -> ""
                 }

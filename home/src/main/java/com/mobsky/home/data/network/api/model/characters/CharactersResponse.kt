@@ -1,9 +1,9 @@
-package com.mobsky.home.data.network.api.model.comics
+package com.mobsky.home.data.network.api.model.characters
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ComicsResponse(
+data class CharactersResponse(
     @SerializedName("attributionHTML")
     val attributionHTML: String? = "",
     @SerializedName("attributionText")
@@ -13,7 +13,7 @@ data class ComicsResponse(
     @SerializedName("copyright")
     val copyright: String? = "",
     @SerializedName("data")
-    val `data`: DataResponse? = DataResponse(),
+    val data: DataResponse? = DataResponse(),
     @SerializedName("etag")
     val etag: String? = "",
     @SerializedName("status")

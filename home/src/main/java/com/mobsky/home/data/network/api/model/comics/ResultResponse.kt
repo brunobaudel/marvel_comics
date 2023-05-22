@@ -3,63 +3,63 @@ package com.mobsky.home.data.network.api.model.comics
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class ResultResponse(
     @SerializedName("characters")
-    val characters: Characters? = Characters(),
+    val characters: CharactersResponse? = CharactersResponse(),
     @SerializedName("collectedIssues")
     val collectedIssues: List<Any>? = listOf(),
     @SerializedName("collections")
     val collections: List<Any>? = listOf(),
     @SerializedName("creators")
-    val creators: Creators? = Creators(),
+    val creators: CreatorsResponse? = CreatorsResponse(),
     @SerializedName("dates")
-    val dates: List<Date>? = listOf(),
+    val dates: List<DateResponse>? = listOf(),
     @SerializedName("description")
-    val description: String? = null,
+    val description: String? = "",
     @SerializedName("diamondCode")
-    val diamondCode: String? = null,
+    val diamondCode: String? = "",
     @SerializedName("digitalId")
     val digitalId: Int? = 0,
     @SerializedName("ean")
-    val ean: String? = null,
+    val ean: String? = "",
     @SerializedName("events")
-    val events: Events? = Events(),
+    val events: EventsResponse? = EventsResponse(),
     @SerializedName("format")
-    val format: String? = null,
+    val format: String? = "",
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("images")
     val images: List<Any>? = listOf(),
     @SerializedName("isbn")
-    val isbn: String? = null,
+    val isbn: String? = "",
     @SerializedName("issn")
-    val issn: String? = null,
+    val issn: String? = "",
     @SerializedName("issueNumber")
     val issueNumber: Int? = 0,
     @SerializedName("modified")
-    val modified: String? = null,
+    val modified: String? = "",
     @SerializedName("pageCount")
     val pageCount: Int? = 0,
     @SerializedName("prices")
-    val prices: List<Price>? = listOf(),
+    val prices: List<PriceResponse>? = listOf(),
     @SerializedName("resourceURI")
-    val resourceURI: String? = null,
+    val resourceURI: String? = "",
     @SerializedName("series")
-    val series: Series? = Series(),
+    val series: SeriesResponse? = SeriesResponse(),
     @SerializedName("stories")
-    val stories: Stories? = Stories(),
+    val stories: StoriesResponse? = StoriesResponse(),
     @SerializedName("textObjects")
     val textObjects: List<Any>? = listOf(),
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail? = Thumbnail(),
+    val thumbnail: ThumbnailResponse? = ThumbnailResponse(),
     @SerializedName("title")
-    val title: String? = null,
+    val title: String? = "",
     @SerializedName("upc")
-    val upc: String? = null,
+    val upc: String? = "",
     @SerializedName("urls")
-    val urls: List<Url>? = listOf(),
+    val urls: List<UrlResponse>? = listOf(),
     @SerializedName("variantDescription")
-    val variantDescription: String? = null,
+    val variantDescription: String? = "",
     @SerializedName("variants")
-    val variants: List<Variant>? = listOf()
+    val variants: List<VariantResponse>? = listOf()
 )

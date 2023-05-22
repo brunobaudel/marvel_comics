@@ -1,15 +1,15 @@
-package com.mobsky.home.data.network.api.model.comics
+package com.mobsky.home.data.network.api.model.characters
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Stories(
+data class ComicsResponse(
     @SerializedName("available")
     val available: Int? = 0,
     @SerializedName("collectionURI")
     val collectionURI: String? = "",
     @SerializedName("items")
-    val items: List<ItemX>? = listOf(),
+    val items: List<ItemResponse?>? = listOf(),
     @SerializedName("returned")
     val returned: Int? = 0
 )
