@@ -9,5 +9,5 @@ data class Thumbnail(
     @SerializedName("path")
     val path: String? = null
 ){
-    fun getCompletePath() = "${path}.${extension}"
+    fun getCompletePath() = "${path?.replace("http","https")}.${extension}"
 }

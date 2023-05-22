@@ -24,11 +24,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.mobsky.home.domain.model.Comic
-import com.mobsky.home.domain.model.Comics
+import com.mobsky.home.domain.model.Characters
+import com.mobsky.home.domain.model.Character
+
 
 @Composable
-fun ComicsListView(comics: Comics, onItemClick: (comic: Comic) -> Unit) {
+fun CharactersListView(characters: Characters, onItemClick: (character: Character) -> Unit = {}) {
 
     Column(
         modifier = Modifier
@@ -38,10 +39,10 @@ fun ComicsListView(comics: Comics, onItemClick: (comic: Comic) -> Unit) {
         verticalArrangement = Arrangement.Center
     ) {
 
-        if (comics.isNotEmpty()) {
+        if (characters.isNotEmpty()) {
             LazyColumn {
-                items(comics) {
-                    UsersListItem(it, onItemClick)
+                items(characters) {
+                    CharactersListItem(it, onItemClick)
                 }
             }
         }
@@ -50,12 +51,12 @@ fun ComicsListView(comics: Comics, onItemClick: (comic: Comic) -> Unit) {
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun UsersListItem(comic: Comic, onItemClick: ((comic: Comic) -> Unit)? = null) {
+fun CharactersListItem(character: Character, onItemClick: ((character: Character) -> Unit)? = null) {
     Card(
         shape = RoundedCornerShape(4.dp),
         modifier = Modifier
             .padding(start = 6.dp)
-            .clickable { onItemClick?.invoke(comic) }
+            .clickable { onItemClick?.invoke(character) }
     ) {
         Column(
             modifier = Modifier
@@ -67,7 +68,7 @@ fun UsersListItem(comic: Comic, onItemClick: ((comic: Comic) -> Unit)? = null) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 GlideImage(
-                    model = comic.imageUrl,
+                    model = character.imageUrl,
                     contentDescription = "LoadImage",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
@@ -80,14 +81,14 @@ fun UsersListItem(comic: Comic, onItemClick: ((comic: Comic) -> Unit)? = null) {
             Text(
                 modifier = Modifier
                     .padding(top = 16.dp, bottom = 8.dp, end = 16.dp, start = 16.dp),
-                text = comic.title,
+                text = character.title,
                 style = MaterialTheme.typography.headlineMedium
             )
 
             Text(
                 modifier = Modifier
                     .padding(bottom = 16.dp, end = 16.dp, start = 16.dp),
-                text = comic.description,
+                text = character.description,
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -96,6 +97,8 @@ fun UsersListItem(comic: Comic, onItemClick: ((comic: Comic) -> Unit)? = null) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun UsersListItemPreview() {
-    UsersListItem(Comic("191", "Bruno", ""))
+fun CharacterListItemPreview() {
+    CharactersListView(
+        listOf( Character("191", "Bruno", ""))
+    )
 }

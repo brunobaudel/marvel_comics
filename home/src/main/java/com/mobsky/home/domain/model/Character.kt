@@ -1,8 +1,8 @@
 package com.mobsky.home.domain.model
 
-typealias Comics = List<Comic>
+typealias Characters = List<Character>
 
-data class Comic(
+data class Character(
     val title: String = "",
     val description: String = "",
     val imageUrl: String = "",

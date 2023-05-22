@@ -7,28 +7,29 @@ import com.mobsky.home.domain.model.Comic
 import com.mobsky.home.domain.model.Comics
 
 fun ComicsResponse?.toComics(): Comics =
-        this?.data?.results?.map{ result ->
-            Comic(
-                title = result.title.orEmpty(),
-                description = result.description.orEmpty(),
-                imageUrl = result.thumbnail?.getCompletePath().orEmpty()
-            )
-        }?: listOf()
+    this?.data?.results?.map { result ->
+        Comic(
+            title = result.title.orEmpty(),
+            description = result.description.orEmpty(),
+            imageUrl = result.thumbnail?.getCompletePath().orEmpty(),
+            pageCount = result.pageCount ?: 0
+        )
+    } ?: listOf()
 
 fun ComicsEntity?.toComics(): Comics =
-    this?.map{ result ->
+    this?.map { result ->
         Comic(
             title = result.title,
             description = result.description,
             imageUrl = result.imageUrl
         )
-    }?: listOf()
+    } ?: listOf()
 
 fun Comics?.toComicsEntity(): ComicsEntity =
-   this?.map {  result->
-       ComicEntity(
-           title = result.title,
-           description = result.description,
-           imageUrl = result.imageUrl
-       )
-   }?: listOf()
+    this?.map { result ->
+        ComicEntity(
+            title = result.title,
+            description = result.description,
+            imageUrl = result.imageUrl
+        )
+    } ?: listOf()

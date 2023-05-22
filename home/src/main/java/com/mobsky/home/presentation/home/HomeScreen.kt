@@ -33,7 +33,7 @@ fun HomeScreen(viewModel: HomeScreenViewModel, onClickNavigation: (navigate: Nav
 
     Scaffold(
         topBar = {
-            MarvelTopBar("Marvel Information", onClickOpenDrawer = {})
+            MarvelTopBar("Marvel Home", onClickOpenDrawer = {})
         },
         content = { innerPadding ->
             Column(

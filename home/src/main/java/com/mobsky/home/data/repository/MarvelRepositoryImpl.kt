@@ -19,8 +19,8 @@ class MarvelRepositoryImpl(
 
             var result = getComicsLocal()
             if (result.isEmpty()) {
-                queryStringParameter.apply { limit = "1" }
-                result = getComicsOnLine(queryStringParameter.getQueryStringMap())
+                queryStringParameter.apply { limit = "30" }
+                 result = getComicsOnLine(queryStringParameter.getQueryStringMap())
                 marvelLocal.insertComics(result.toComicsEntity())
             }
             result
